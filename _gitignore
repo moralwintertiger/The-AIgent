@@ -1,0 +1,4 @@
+.ipynb*
+.DS_Store
+*.cpython-36.pyc
+*.cpython-37.pyc

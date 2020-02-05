@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The AIgent: Similar Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .container {
+            padding: 2rem 0rem;
+        }
+
+        h4 {
+            margin: 2rem 0rem 1rem;
+        }
+
+        .table-image {
+
+            td,
+            th {
+                vertical-align: middle;
+            }
+        }
+
+        .hovereffect {
+            width: 100%;
+            height: 100%;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            cursor: default;
+        }
+
+        .hovereffect .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        .hovereffect img {
+            display: block;
+            position: relative;
+            -webkit-transition: all 0.4s ease-in;
+            transition: all 0.4s ease-in;
+        }
+
+        .hovereffect:hover img {
+            filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+            filter: grayscale(1) blur(3px);
+            -webkit-filter: grayscale(1) blur(3px);
+            -webkit-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+
+        .hovereffect h2 {
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            font-size: 17px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hovereffect a.info {
+            display: inline-block;
+            text-decoration: none;
+            padding: 7px 14px;
+            border: 1px solid #fff;
+            margin: 50px 0 0 0;
+            background-color: transparent;
+        }
+
+        .hovereffect a.info:hover {
+            box-shadow: 0 0 5px #fff;
+        }
+
+        .hovereffect a.info,
+        .hovereffect h2 {
+            -webkit-transform: scale(0.7);
+            -ms-transform: scale(0.7);
+            transform: scale(0.7);
+            -webkit-transition: all 0.4s ease-in;
+            transition: all 0.4s ease-in;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .hovereffect:hover a.info,
+        .hovereffect:hover h2 {
+            opacity: 1;
+            filter: alpha(opacity=100);
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+
+        hr.dotted {
+            border-top: 2px dotted #999;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container pt-3">
+        <div class="card">
+            <div class="card-header">
+                <h3>The AIgent Says...</h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Target Synopsis:</h5>
+                <p class="card-text">{{input_synopsis}}</p>
+                <a href="/" class="btn btn-primary">Enter another</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <hr class="dotted">
+    </div>
+
+    <div class="container">
+        <h3>Genre Predictions</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{tags[0].genre}}</td>
+                    <td>{{tags[0].strength}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>{{tags[1].genre}}</td>
+                    <td>{{tags[1].strength}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>{{tags[2].genre}}</td>
+                    <td>{{tags[2].strength}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>{{tags[3].genre}}</td>
+                    <td>{{tags[3].strength}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>{{tags[4].genre}}</td>
+                    <td>{{tags[4].strength}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mb-4">
+        <hr class="dotted">
+    </div>
+
+    <div class="container">
+        <h3>Similar Books</h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-image">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Cover</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Sim Score</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Avg Rating</th>
+                            <th scope="col">Rating Count</th>
+                            <th scope="col">Popularity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+
+
+                        <tr>
+                            <th scope="row">1</th>
+                            <td class="w-25">
+                               <div class="hovereffect">
+                                    <a href="{{t0_book_url}}"><img class="img-responsive" src="{{t0_image_url}}"></a>
+                                    <div class="overlay">
+                                        <h2>{{t0_title}}</h2>
+                                        <a class="info" href="{{t0_image_url}}">GoodReads Page</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{t0_title}}</td>
+                            <td>{{t0_sim_score}}</td>
+                            <td>{{t0_authoor}}</td>
+                            <td>{{t0_year}}</td>
+                            <td>{{t0_publisher}}</td>
+                            <td>{{t0_rating}}</td>
+                            <td>{{t0_rating_count}}</td>
+                            <td>Top {{t0_record_rating}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="row">2</th>
+                            <td class="w-25">
+                               <div class="hovereffect">
+                                    <a href="{{t1_book_url}}"><img class="img-responsive" src="{{t1_image_url}}"></a>
+                                    <div class="overlay">
+                                        <h2>{{t1_title}}</h2>
+                                        <a class="info" href="{{t1_image_url}}">GoodReads Page</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{t1_title}}</td>
+                            <td>{{t1_sim_score}}</td>
+                            <td>{{t1_authoor}}</td>
+                            <td>{{t1_year}}</td>
+                            <td>{{t1_publisher}}</td>
+                            <td>{{t1_rating}}</td>
+                            <td>{{t1_rating_count}}</td>
+                            <td>Top {{t1_record_rating}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="row">3</th>
+                            <td class="w-25">
+                               <div class="hovereffect">
+                                    <a href="{{t2_book_url}}"><img class="img-responsive" src="{{t2_image_url}}"></a>
+                                    <div class="overlay">
+                                        <h2>{{t2_title}}</h2>
+                                        <a class="info" href="{{t2_image_url}}">GoodReads Page</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{t2_title}}</td>
+                            <td>{{t2_sim_score}}</td>
+                            <td>{{t2_authoor}}</td>
+                            <td>{{t2_year}}</td>
+                            <td>{{t2_publisher}}</td>
+                            <td>{{t2_rating}}</td>
+                            <td>{{t2_rating_count}}</td>
+                            <td>Top {{t2_record_rating}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="row">4</th>
+                            <td class="w-25">
+                               <div class="hovereffect">
+                                    <a href="{{t3_book_url}}"><img class="img-responsive" src="{{t3_image_url}}"></a>
+                                    <div class="overlay">
+                                        <h2>{{t3_title}}</h2>
+                                        <a class="info" href="{{t3_image_url}}">GoodReads Page</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{t3_title}}</td>
+                            <td>{{t3_sim_score}}</td>
+                            <td>{{t3_authoor}}</td>
+                            <td>{{t3_year}}</td>
+                            <td>{{t3_publisher}}</td>
+                            <td>{{t3_rating}}</td>
+                            <td>{{t3_rating_count}}</td>
+                            <td>Top {{t3_record_rating}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="row">5</th>
+                            <td class="w-25">
+                               <div class="hovereffect">
+                                    <a href="{{t4_book_url}}"><img class="img-responsive" src="{{t4_image_url}}"></a>
+                                    <div class="overlay">
+                                        <h2>{{t4_title}}</h2>
+                                        <a class="info" href="{{t4_image_url}}">GoodReads Page</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{t4_title}}</td>
+                            <td>{{t4_sim_score}}</td>
+                            <td>{{t4_authoor}}</td>
+                            <td>{{t4_year}}</td>
+                            <td>{{t4_publisher}}</td>
+                            <td>{{t4_rating}}</td>
+                            <td>{{t4_rating_count}}</td>
+                            <td>Top {{t4_record_rating}}</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <hr class="dotted">
+    </div>
+
+    <div class="container">
+        <h3>Explore Similar Synopses</h3>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-image">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Synopsis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{t0_title}}</td>
+                            <td>{{t0_sim_score}}</td>
+                            <td>{{t0_synopsis}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>{{t1_title}}</td>
+                            <td>{{t1_sim_score}}</td>
+                            <td>{{t1_synopsis}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>{{t2_title}}</td>
+                            <td>{{t2_sim_score}}</td>
+                            <td>{{t2_synopsis}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>{{t3_title}}</td>
+                            <td>{{t3_sim_score}}</td>
+                            <td>{{t3_synopsis}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>{{t4_title}}</td>
+                            <td>{{t4_sim_score}}</td>
+                            <td>{{t4_synopsis}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
