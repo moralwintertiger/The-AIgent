@@ -1,9 +1,9 @@
 
 # Data Overview
 
-These datasets were generated January 25, 2020. Datasets are not currently hosted, please reach out if you are interested in reproducing this work.
-
-Note: Each dataset has 9338 records (not 9668). 
+* Each dataset has 9338 records (not 9668). 
+* Datasets were generated 01/25/2020. 
+* Datasets are not currently hosted as of 03/05/2020. Please reach out for more information.
 
 ## full-ids-genretags-OHE-synopses-df-m9668-n20.csv
 
