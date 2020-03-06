@@ -17,7 +17,7 @@ The <a href="http://www.insilicoveritas.net:5000/">AIgent</a> is an app designed
 * <a href="https://github.com/moralwintertiger/flask-agent-v1/tree/master/analyses">Classifier & Analyses</a>
 
 ### Build Workflow
-The AIgent was built in a 3-week period as part of an <a href="https://www.insightdatascience.com/">Insight Data Science</a> fellowship.<br><br>
+The AIgent was built in a 3-week period as part of an <a href="https://www.insightdatascience.com/">Insight Data Science</a> fellowship.
 * Scraped the metadata tags and synopses of >100k GoodReads titles using BeautifulSoup.<br>
 * Leveraged pre-tained embeddings from the state-of-the-art BERT language model.<br>
 * Built out a text classifier and transfer learning pipeline with TensorFlow, sklearn, and Pytorch.<br>
