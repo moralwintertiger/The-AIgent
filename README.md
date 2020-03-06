@@ -14,6 +14,7 @@ The <a href="http://www.insilicoveritas.net:5000/">AIgent</a> is an app designed
 * <a href="https://github.com/moralwintertiger/flask-agent-v1/tree/master/templates">App Design</a>
 * <a href="https://github.com/moralwintertiger/flask-agent-v1/tree/master/data">Data Overview</a>
 * <a href="https://github.com/moralwintertiger/flask-agent-v1/tree/master/similars_model">Technical Overview</a>
+* <a href="https://github.com/moralwintertiger/flask-agent-v1/tree/master/analyses">Classifier & Analyses</a>
 
 ### Build Workflow
 The AIgent was built in a 3-week period as part of an <a href="https://www.insightdatascience.com/">Insight Data Science</a> fellowship.<br><br>
