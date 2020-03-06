@@ -2,7 +2,7 @@
 
 ## Using AI to connect writers & representation
 
-<p align="center"><img src="https://raw.githubusercontent.com/moralwintertiger/flask-agent-v1/master/images/slide_01_publishing.png"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/moralwintertiger/flask-agent-v1/master/images/slide_01_publishing.png" style="width:50px"></p>
 
 <p align="center"><img src="https://raw.githubusercontent.com/moralwintertiger/flask-agent-v1/master/images/slide_02_workflow.png"></p>
 
