@@ -7,4 +7,8 @@ Several classification strategies are common for text, including support vector 
 
 Not all feature experimentation is included in this notebook. In other notebooks, I have tested the effect of synopsis length on classifier strength, seeking to set a balance between the speed of the model (which slows with longer synopses) and the robustness of the model (which slowly increases with longer synopses).
 
+## The AIgent: Validation
+Several approaches should be taken to evaluate the AIgent, as this tool employs a few different models and data types and has distinct predictive functions. Validation of genre tag prediction is straightforward (e.g., precision scoring) and is performed in the Jupyter notebook describing construction of genre tag regressors.
+
+It is more complicated to evaluate the AIgent's surfacing of similar titles (which is performed by calculating cosine similarity between a queried, embedded synopsis and a database of embedded synopses). For this task, I will determine whether embeddings from the AIgent are capable of clustering the works of different authors. I will employ a small set of highly prolific authors for this task. To aid visualization, embeddings undergo dimensionality reduction using TSNE.
 
