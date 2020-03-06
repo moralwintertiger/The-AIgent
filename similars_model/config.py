@@ -1,13 +1,10 @@
 from typing import List
 
-# data_path: str = '../production-ready-data/'
-# lr_path: str = '../production-ready-data/log-reg-models/'
+data_path: str = '../production-ready-data/'
+lr_path: str = '../production-ready-data/log-reg-models/'
 
 #data_path = '/home/ubuntu/agent-python3/production-ready-data/'
 #lr_path = '/home/ubuntu/agent-python3/production-ready-data/log-reg-models/'
-
-data_path = '/Users/ryan/Projects/Insight/insight/Agent-2/agent-2/streamlit-agent/production-ready-data/'
-lr_path = '/Users/ryan/Projects/Insight/insight/Agent-2/agent-2/streamlit-agent/production-ready-data/log-reg-models/'
 
 book_ids: str = "full-ids-genretags-OHE-synopses-df-m9668-n20.csv"
 
